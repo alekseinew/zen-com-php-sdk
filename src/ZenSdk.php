@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zen;
@@ -8,7 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use Zen\Config\AbstractConfig;
 use Zen\Config\ConfigProvider;
-use Zen\Exception\ZenException;
 use Zen\Request\Dto\CreatePayoutRequestDto;
 use Zen\Request\Dto\CreateTransactionRequestDto;
 use Zen\Request\Dto\RefundRequestDto;
@@ -24,33 +24,20 @@ use Zen\Response\ZenResponse;
  */
 class ZenSdk
 {
-    /**
-     * @var RequestBuilder
-     */
     private RequestBuilder $requestBuilder;
 
-    /**
-     * @var Client
-     */
     private Client $client;
 
-    /**
-     * @var AbstractConfig
-     */
     private AbstractConfig $config;
 
     public function __construct()
     {
         $this->config = ConfigProvider::provide();
         $this->requestBuilder = new RequestBuilder($this->config);
-        $this->client = new Client();
+        $this->client = new Client;
     }
 
     /**
-     * @param string                 $requestId
-     * @param CreatePayoutRequestDto $dto
-     *
-     * @return ZenResponse
      * @throws GuzzleException
      */
     public function createPayout(string $requestId, CreatePayoutRequestDto $dto): ZenResponse
@@ -61,10 +48,6 @@ class ZenSdk
     }
 
     /**
-     * @param string                      $requestId
-     * @param CreateTransactionRequestDto $dto
-     *
-     * @return ZenResponse
      * @throws GuzzleException
      */
     public function createTransaction(string $requestId, CreateTransactionRequestDto $dto): ZenResponse
@@ -75,10 +58,6 @@ class ZenSdk
     }
 
     /**
-     * @param string $requestId
-     * @param string $transactionId
-     *
-     * @return ZenResponse
      * @throws GuzzleException
      */
     public function getTransactionStatus(string $requestId, string $transactionId): ZenResponse
@@ -89,10 +68,6 @@ class ZenSdk
     }
 
     /**
-     * @param string           $requestId
-     * @param RefundRequestDto $dto
-     *
-     * @return ZenResponse
      * @throws GuzzleException
      */
     public function refundTransaction(string $requestId, RefundRequestDto $dto): ZenResponse
@@ -116,16 +91,13 @@ class ZenSdk
         $transactionStatus = $data['status'];
         $ipnSecret = $this->config->getIpnSecret();
 
-        $str = \sprintf("%s%s%s%s%s", $mtId, $currency, $amount, $transactionStatus, $ipnSecret);
+        $str = \sprintf('%s%s%s%s%s', $mtId, $currency, $amount, $transactionStatus, $ipnSecret);
         $hash = hash('sha256', $str);
 
         return $ipnHash === strtoupper($hash);
     }
 
     /**
-     * @param Request $request
-     *
-     * @return ZenResponse
      * @throws GuzzleException
      */
     private function sendRequest(Request $request): ZenResponse

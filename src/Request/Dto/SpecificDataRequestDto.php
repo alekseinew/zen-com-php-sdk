@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zen\Request\Dto;
@@ -22,8 +23,8 @@ class SpecificDataRequestDto
     private string $type;
 
     /**
-     * @param string $recipientExternalId Recipient external identifier.
-     * @param string $type Type of transaction.
+     * @param  string  $recipientExternalId  Recipient external identifier.
+     * @param  string  $type  Type of transaction.
      */
     public function __construct(string $recipientExternalId, string $type)
     {
@@ -31,17 +32,11 @@ class SpecificDataRequestDto
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getRecipientExternalId(): string
     {
         return $this->recipientExternalId;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;

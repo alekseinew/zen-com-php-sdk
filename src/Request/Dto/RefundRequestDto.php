@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Zen\Request\Dto;
@@ -60,10 +61,10 @@ class RefundRequestDto
     private ?SourceRequestDto $source = null;
 
     /**
-     * @param string $transactionId Transaction ID generated during the create transaction process.
-     * @param string $merchantTransactionId ID of the transaction provided by the merchant.
-     * @param string $amount Amount of the transaction.
-     * @param string $currency Currency code in ISO 4217 alphabetic format.
+     * @param  string  $transactionId  Transaction ID generated during the create transaction process.
+     * @param  string  $merchantTransactionId  ID of the transaction provided by the merchant.
+     * @param  string  $amount  Amount of the transaction.
+     * @param  string  $currency  Currency code in ISO 4217 alphabetic format.
      */
     public function __construct(
         string $transactionId,
@@ -77,95 +78,59 @@ class RefundRequestDto
         $this->merchantTransactionId = $merchantTransactionId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
-    /**
-     * @param string|null $comment
-     *                            
-     * @return self                            
-     */
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
-        
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAmount(): string
     {
         return $this->amount;
     }
 
-    /**
-     * @return string
-     */
     public function getTransactionId(): string
     {
         return $this->transactionId;
     }
 
-    /**
-     * @return string
-     */
     public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @return string
-     */
     public function getMerchantTransactionId(): string
     {
         return $this->merchantTransactionId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOriginMerchantTransactionId(): ?string
     {
         return $this->originMerchantTransactionId;
     }
 
-    /**
-     * @param string|null $originMerchantTransactionId
-     *                                                
-     * @return self                                                
-     */
     public function setOriginMerchantTransactionId(?string $originMerchantTransactionId): self
     {
         $this->originMerchantTransactionId = $originMerchantTransactionId;
-        
+
         return $this;
     }
 
-    /**
-     * @return SourceRequestDto|null
-     */
     public function getSource(): ?SourceRequestDto
     {
         return $this->source;
     }
 
-    /**
-     * @param SourceRequestDto|null $source
-     *                              
-     * @return self                              
-     */
     public function setSource(?SourceRequestDto $source): self
     {
         $this->source = $source;
-        
+
         return $this;
     }
 }

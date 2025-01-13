@@ -2,10 +2,6 @@
 
 PHP client library for interaction with ZEN.COM API
 
-## Installation
-```bash
-composer require obanach/zen-php-sdk
-```
 
 ## Usage
 ### add params to .env
